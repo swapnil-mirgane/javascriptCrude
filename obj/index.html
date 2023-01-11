@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CRUD</title>
+        <script src="./index.js"></script>
+        <style>
+      #d1 {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        justify-content: center;
+        align-items: center;    
+      }
+    button{
+        margin: 10px;
+    }
+    </style>
+    </head>
+    <body>
+        <div id="d1">
+            <label for="fname">Name: <input type="text" id="fname" /></label>
+            <label for="">Gender: <label for="male"> <input type="radio"
+                        value="male" name="gen" id="male" checked/>Male</label>
+                <label for="female"> <input type="radio" value="Female"
+                        name="gen" id="female" />Female</label>
+            </label>
+            <label for="email">Email: <input type="email" id="email" /></label>
+            <label for="contact">Contact: <input type="number" id="contact" /></label>
+            <label for="state">
+                Select District:<select name="state" id="state">
+                    <option value="No Select">select</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Solapur">Solapur</option>
+                    <option value="Satara">Satara</option>
+                </select></label>
+            <label for="hobby">Hobby :<br />
+                <span><input type="checkbox" name="hobby" value="Cricket" checked/>Cricket</span>
+                <span><input type="checkbox" name="hobby" value="Swimming" />Swimming</span>
+            </label>
+            <span> <button onclick="add()">Add</button><button onclick="save()">Save</button> <button onclick="edit()">Edit</button><button onclick="search()">Search</button></span>
+        </div>
+        <div id="d2">
+            <table border="1px">
+                <thead>
+                    <tr>
+                        <th>SNo</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>State</th>
+                        <th>Hobby</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="tab">
+
+                </tbody>
+               
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body>table{
+            width: 80%;
+        }
+        table{
+            border-collapse: collapse;
+        }
+        table list{
+            width: 100%;
+        }
+        td th{
+            border: 1px solid white;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even).table.list thead>tr{
+            background-color: aliceblue;
+        }
+        input[type-text],input[type-number]{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0px;
+            display: inline-block;
+            border: 1px solid white;
+        }
+    </style>
+    <script>
+        var selectedRow=null;
+        function onFromSubmit(){
+            var formData=readFromData();
+            if(selectedRow==null)
+            insertNewRecord(formData);
+            else
+            updateData(formData);
+            resetForm();
+
+
+        }
+        function readFromData() {
+            var formData={};
+            formData["fullname"]=document.getElementById("fullName").value;
+            formData["empCode"]=document.getElementById("empCode").value;
+            formData["city"]=document.getElementById("city").value;
+            return formData;
+            
+        }
+        function insertNewRecord(data){
+            var table=document.getElementById("employeeList").getElementsByTagName("tbody")[0];
+            var newRow=table.insertRow(table.legth);
+            cell1=newRow.insertCell(0);
+            cell1.innerHTML=data.fullname;
+
+            cell2=newRow.insertCell(1);
+            cell2.innerHTML=data.empCode;
+
+            cell3=newRow.insertCell(2);
+            cell3.innerHTML=data.city;
+
+            cell4=newRow.insertCell(3);
+            cell4.innerHTML=`<button onClick="onEdit(this)">Edit</button> <button onClick="onDelete(this)">Delete</button>`;
+        }
+        function resetForm(){
+            document.getElementById("fullName").value= "";
+            document.getElementById("empCode").value="";
+            document.getElementById("city").value="";
+            selectedRow=null;
+        }
+        function onEdit(td){
+             selectedRow=td.parentElement.parentElement;
+             document.getElementById("fullName").value=selectedRow.cells[0].innerHTML;
+             document.getElementById("empCode").value=selectedRow.cells[1].innerHTML;
+             document.getElementById("city").value=selectedRow.cells[2].innerHTML;
+             console.log("hiii");
+
+
+
+        }
+         function updateData(formData){
+            selectedRow.cells[0].innerHTML=formData.fullname;
+            selectedRow.cells[1].innerHTML=formData.empCode;
+            selectedRow.cells[2].innerHTML=formData.city;
+
+         }
+         function onDelete(td){
+            if(confirm("are you sure to delete this record ?")){
+            row= td.parentElement.parentElement;
+            document.getElementById("employeeList").deleteRow(row.rowIndex);
+            resetForm();
+            }
+         }
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <form onsubmit="event.preventDefault(); onFromSubmit();" autocomplete="off">
+                    <div>
+                        <label for="">FullNmae</label>
+                        <input type="text" name="fullname"id="fullName">
+                    </div>
+                    <div>
+                        <label for="">empcode</label>
+                        <input type="text" name="empcode" id="empCode">
+                    </div>
+                    <div>
+                        <label for="">city</label>
+                        <input type="text" name="city" id="city">
+                    </div>
+                    <div class="formActionButton">
+                        <input type="submit" value="submit">
+                    </div>
+                </form>
+            </td>
+           
+        </tr>
+    </table>
+    <div>
+        <table class="list" id="employeeList">
+            <thead>
+                <tr>
+                    <th>FullNmae</th>
+                    <th>EmpCode</th>
+                    <th>City</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
